@@ -12,13 +12,13 @@ void main(List<String> args) {
   addFilesToGit();
 }
 
-void createCleanArchitectureFiles(String featureName) {
+void createCleanArchitectureFiles(String featureName) async {
   createDirectories(featureName);
   createDataFiles(featureName);
   createDomainFiles(featureName);
   createPresentationFiles(featureName);
-  createInitParamsFile(featureName);
-  createInjectionContainerFile(featureName);
+  // createInitParamsFile(featureName);
+  // createInjectionContainerFile(featureName);
 }
 
 void createDirectories(String featureName) {
@@ -41,13 +41,33 @@ void createDirectories(String featureName) {
       .createSync(recursive: true);
   Directory('lib/features/${featureName.toSnakeCase()}/presentation/widgets')
       .createSync(recursive: true);
-  Directory('lib/features/${featureName.toSnakeCase()}/presentation/pages')
+  Directory('lib/features/${featureName.toSnakeCase()}/presentation/screens')
       .createSync(recursive: true);
 }
 
 void createDataFiles(String featureName) {
   File('lib/features/${featureName.toSnakeCase()}/data/data_sources/local/${featureName.toSnakeCase()}_local_data_source.dart')
-      .createSync(recursive: true);
+      .writeAsStringSync('''
+import 'package:dartz/dartz.dart';
+
+
+abstract class ${featureName.capitalize()}LocalDataSource {
+  Future<Unit> getFromLocalDataBase();
+}
+
+class ${featureName.capitalize()}LocalDataSourceImpl implements ${featureName.capitalize()}LocalDataSource {
+  ${featureName.capitalize()}LocalDataSourceImpl();
+
+  @override
+  Future<Unit> getFromLocalDataBase() async {
+    // send api request here
+    return Future.value(unit);
+  }
+
+}
+
+
+  ''');
   File('lib/features/${featureName.toSnakeCase()}/data/data_sources/remote/${featureName.toSnakeCase()}_remote_data_source.dart')
       .writeAsStringSync('''
 import 'package:dartz/dartz.dart';
@@ -72,11 +92,10 @@ class ${featureName.capitalize()}RemoteDataSourceImpl implements ${featureName.c
   ''');
   File('lib/features/${featureName.toSnakeCase()}/data/models/${featureName.toSnakeCase()}_model.dart')
       .writeAsStringSync('''
-
 import '../../domain/entities/${featureName.toSnakeCase()}.dart';
 
 class ${featureName.capitalize()}Model extends ${featureName.capitalize()} {
-  ${featureName.capitalize()}Model(
+  const ${featureName.capitalize()}Model(
       {required String data})
       : super(data: data);
 
@@ -127,16 +146,13 @@ class ${featureName.capitalize()}RepositoryImpl implements ${featureName.capital
 void createDomainFiles(String featureName) {
   File('lib/features/${featureName.toSnakeCase()}/domain/entities/${featureName.toSnakeCase()}.dart')
       .writeAsStringSync('''
-import 'package:equatable/equatable.dart';
-class ${featureName.capitalize()} extends Equatable {
+class ${featureName.capitalize()} {
   final String? data;
 
   const ${featureName.capitalize()}({
     required this.data,
   });
 
-  @override
-  List<Object?> get props => [data];
 }
 ''');
   File('lib/features/${featureName.toSnakeCase()}/domain/repositories/${featureName.toSnakeCase()}_repository.dart')
@@ -170,21 +186,74 @@ class ${featureName.capitalize()}UseCase {
 
 void createPresentationFiles(String featureName) {
   File('lib/features/${featureName.toSnakeCase()}/presentation/provider/${featureName.toSnakeCase()}_provider.dart')
-      .createSync(recursive: true);
-  File('lib/features/${featureName.toSnakeCase()}/presentation/widgets/${featureName.toSnakeCase()}_widget.dart')
-      .createSync(recursive: true);
-  File('lib/features/${featureName.toSnakeCase()}/presentation/pages/${featureName.toSnakeCase()}_page.dart')
-      .createSync(recursive: true);
+      .writeAsStringSync('''
+import 'package:flutter/material.dart';
+
+class ${featureName.toSnakeCase()}Manager extends ChangeNotifier {
+  ${featureName.toSnakeCase()}Manager() {
+    init();
+  }
+
+  void init() async {
+
+  }
+}
+
+      ''');
+  // File('lib/features/${featureName.toSnakeCase()}/presentation/widgets/${featureName.toSnakeCase()}_widget.dart')
+  //     .createSync(recursive: true);
+  File('lib/features/${featureName.toSnakeCase()}/presentation/screens/${featureName.toSnakeCase()}_screen.dart')
+      .writeAsStringSync('''
+import 'package:flutter/material.dart';
+
+class ${featureName.capitalize()}Screen extends StatefulWidget {
+  const ${featureName.capitalize()}Screen({super.key});
+  @override
+  State<${featureName.capitalize()}Screen> createState() => _${featureName.capitalize()}State();
+}
+
+class _${featureName.capitalize()}State extends State<${featureName.capitalize()}Screen> {
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+        body: Placeholder()
+    );
+  }
+}
+      ''');
 }
 
 void createInitParamsFile(String featureName) {
-  File('lib/features/${featureName.toSnakeCase()}/${featureName.toSnakeCase()}_init_params.dart')
-      .createSync(recursive: true);
+  // File('lib/features/${featureName.toSnakeCase()}/${featureName.toSnakeCase()}_init_params.dart')
+  //     .createSync(recursive: true);
 }
 
 void createInjectionContainerFile(String featureName) {
   File('lib/features/${featureName.toSnakeCase()}/injection_container.dart')
-      .createSync(recursive: true);
+      .writeAsStringSync('''
+import 'data/data_sources/profile_remote_data_source.dart';
+import 'data/repositories/profile_repository_impl.dart';
+import 'domain/repositories/profile_repository.dart';
+import 'domain/use_cases/profile_use_case.dart';
+import 'presentation/manager/profile_manager.dart';
+
+injectProfile() {
+  // Providers
+  getIt.registerFactory(() => ${featureName.capitalize()}Manager(${featureName.capitalize()}UseCase: getIt()));
+
+  // Repository
+  getIt.registerLazySingleton<${featureName.capitalize()}Repository>(
+          () => ${featureName.capitalize()}RepositoryImpl(remoteDataSource: getIt()));
+
+  // UseCases
+  getIt.registerLazySingleton(() => ${featureName.capitalize()}UseCase(getIt()));
+
+  // DataSources
+  getIt.registerLazySingleton<${featureName.capitalize()}RemoteDataSource>(
+          () => ${featureName.capitalize()}RemoteDataSourceImpl(apiProvider: getIt()));
+}
+      ''');
 }
 
 void addFilesToGit() {
@@ -212,3 +281,4 @@ extension StringExtension on String {
     }).replaceAll(RegExp(r'\s+'), '_');
   }
 }
+

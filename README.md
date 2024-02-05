@@ -12,6 +12,36 @@ This Dart package provides a clean architecture template with state management.
 - State management integration for a smooth user interface.
 - Easily customizable and extendable.
 
+## Folder Structure
+```
+|- features
+|  ┌ feature_name/
+|  |- data/
+|  |    |-data_sources/
+|  |    |    |- local/
+|  |    |    |    └  feature_name_local_data_source.dart
+|  |    |    └ remote/
+|  |    |         └  feature_name_remote_data_source.dart
+|  |    |- models/
+|  |    |    └  feature_model.dart
+|  |    └ repositories/
+|  |         └  feature_name_repository_impl.dart
+|  |- domain/
+|  |    |- entities/
+|  |    |    └  feature.dart
+|  |    |- repositories/
+|  |    |    └  feature_repository.dart
+|  |    └ use_case/
+|  |         └  feature_use_case.dart
+|  |- presentation/
+|  |    |- provider/
+|  |    |    └  feature_provider.dart
+|  |    |- widgets/
+|  |    └  screens/
+|  |         └  feature_screen.dart
+```
+
+
 ## Getting Started
 
 ### Installation
@@ -20,7 +50,7 @@ Add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  clean_architecture_with_state_management: ^0.0.1
+  clean_architecture_with_state_management:
 ```
 
 ## Usage
