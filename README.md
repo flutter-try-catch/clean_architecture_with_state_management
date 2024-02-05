@@ -49,7 +49,7 @@ This Dart package provides a clean architecture template with state management.
 Add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
-dependencies:
+dev_dependencies:
   clean_architecture_with_state_management:
 ```
 
