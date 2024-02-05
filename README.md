@@ -20,7 +20,7 @@ Add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  clean_architecture_with_state_management: ^1.0.0
+  clean_architecture_with_state_management: ^0.0.1
 ```
 
 ## Usage
