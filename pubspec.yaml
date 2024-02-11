@@ -1,6 +1,6 @@
 name: clean_architecture_with_state_management
 description: "create clean architecture with state management"
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/flutter-try-catch/clean_architecture_with_state_management
 
 environment:
@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   dartz: ^0.10.1
+  get_it: ^7.6.4
 
 dev_dependencies:
   flutter_test:

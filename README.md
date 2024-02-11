@@ -39,6 +39,7 @@ This Dart package provides a clean architecture template with state management.
 |  |    |- widgets/
 |  |    └  screens/
 |  |         └  feature_screen.dart
+|  └ inject_feature_name.dart
 ```
 
 
@@ -57,5 +58,11 @@ dev_dependencies:
 
 Basic usage example: 
 ```bash
-dart run clean_architecture_with_state_management your_feature_name
+dart run clean_architecture_with_state_management yourFeatureName
+```
+
+Create architecture with provider state management:
+```bash
+```bash
+dart run clean_architecture_with_state_management yourFeatureName -provider
 ```
