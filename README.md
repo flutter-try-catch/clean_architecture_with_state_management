@@ -63,6 +63,5 @@ dart run clean_architecture_with_state_management yourFeatureName
 
 Create architecture with provider state management:
 ```bash
-```bash
 dart run clean_architecture_with_state_management yourFeatureName -provider
 ```
