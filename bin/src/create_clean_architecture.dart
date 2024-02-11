@@ -26,8 +26,6 @@ void createDirectories(String featureName) {
       .createSync(recursive: true);
   Directory('lib/features/${featureName.toSnakeCase()}/domain/use_cases')
       .createSync(recursive: true);
-  Directory('lib/features/${featureName.toSnakeCase()}/presentation/provider')
-      .createSync(recursive: true);
   Directory('lib/features/${featureName.toSnakeCase()}/presentation/widgets')
       .createSync(recursive: true);
   Directory('lib/features/${featureName.toSnakeCase()}/presentation/screens')
