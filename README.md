@@ -92,3 +92,43 @@ dart run clean_architecture_with_state_management yourFeatureName -provider
 |  |         └  feature_screen.dart
 |  └ inject_feature_name.dart
 ```
+
+
+Create architecture with bloc state management:
+
+```bash
+dart run clean_architecture_with_state_management yourFeatureName -bloc
+```
+
+## Folder Structure
+```
+|- features
+|  ┌ feature_name/
+|  |- data/
+|  |    |-data_sources/
+|  |    |    |- local/
+|  |    |    |    └  feature_name_local_data_source.dart
+|  |    |    └ remote/
+|  |    |         └  feature_name_remote_data_source.dart
+|  |    |- models/
+|  |    |    └  feature_model.dart
+|  |    └ repositories/
+|  |         └  feature_name_repository_impl.dart
+|  |- domain/
+|  |    |- entities/
+|  |    |    └  feature.dart
+|  |    |- repositories/
+|  |    |    └  feature_repository.dart
+|  |    └ use_case/
+|  |         └  feature_use_case.dart
+|  |- presentation/
+|  |    |- bloc/
+|  |    |    └  feature_bloc.dart
+|  |    |    └  feature_event.dart
+|  |    |    └  feature_state.dart
+|  |    |- widgets/
+|  |    └  screens/
+|  |         └  feature_screen.dart
+|  └ inject_feature_name.dart
+```
+
