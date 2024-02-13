@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'src/create_clean_architecture.dart';
 import 'src/create_clean_architecture_bloc.dart';
+import 'src/create_clean_architecture_cubit.dart';
 import 'src/create_clean_architecture_provider.dart';
 
 void main(List<String> args) async {
@@ -15,15 +16,19 @@ void main(List<String> args) async {
 
   final featureName = args[0];
   await init(featureName);
-  if (args.length == 1) {
-    await createCleanArchitectureFiles(featureName);
-  } else if (args[1] == '-provider') {
+
+  await createCleanArchitectureFiles(featureName);
+
+  if (args[1] == '-provider') {
     await createCleanArchitectureProviderFiles(featureName);
   } else if (args[1] == '-bloc') {
     await createCleanArchitectureBlocFiles(featureName);
+  } else if (args[1] == '-cubit') {
+    await createCleanArchitectureCubitFiles(featureName);
   }
   addFilesToGit();
 }
+
 Future init(String featureName) async {
   // Check if the file exists, if not, create it
   final file = File('lib/injection_container.dart');
