@@ -47,15 +47,20 @@ part '${featureName.toSnakeCase()}_state.dart';
 class ${featureName.capitalize()}Bloc extends Bloc<${featureName.capitalize()}Event, ${featureName.capitalize()}State> {
   final ${featureName.capitalize()}UseCase ${featureName}UseCase;
 
-  ${featureName.capitalize()}Bloc({required this.${featureName}UseCase}) : super(${featureName.capitalize()}Initial());
+  ${featureName.capitalize()}Bloc({required this.${featureName}UseCase}) : super(const ${featureName.capitalize()}Initial()) {
+    on<${featureName.capitalize()}Event>(_${featureName.toLowerCaseFirst()});
+  }
 
-  Stream<${featureName.capitalize()}State> mapEventToState(${featureName.capitalize()}Event event) async* {
-      yield const ${featureName.capitalize()}Loading();
-      final result = await ${featureName}UseCase.call();
-      yield result.fold(
-        (exception) => ${featureName.capitalize()}Error(exception),
-        (_) => const ${featureName.capitalize()}Loaded(),
-      );
+  Future<void> _${featureName.toLowerCaseFirst()}(
+    ${featureName.capitalize()}Event event,
+    Emitter<${featureName.capitalize()}State> emit,
+  ) async {
+    emit(const ${featureName.capitalize()}Loading());
+    final result = await ${featureName}UseCase.call();
+    result.fold(
+      (exception) => emit(${featureName.capitalize()}Error(exception)),
+      (_) => emit(const ${featureName.capitalize()}Loaded()),
+    );
   }
 }
 
