@@ -96,6 +96,8 @@ dart run clean_architecture_with_state_management yourFeatureName -provider
 
 Create architecture with bloc state management:
 
+# bloc
+
 ```bash
 dart run clean_architecture_with_state_management yourFeatureName -bloc
 ```
