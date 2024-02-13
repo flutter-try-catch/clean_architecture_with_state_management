@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'src/create_clean_architecture.dart';
 import 'src/create_clean_architecture_bloc.dart';
+import 'src/create_clean_architecture_cubit.dart';
 import 'src/create_clean_architecture_provider.dart';
 
 void main(List<String> args) async {
@@ -22,6 +23,8 @@ void main(List<String> args) async {
     await createCleanArchitectureProviderFiles(featureName);
   } else if (args[1] == '-bloc') {
     await createCleanArchitectureBlocFiles(featureName);
+  } else if (args[1] == '-cubit') {
+    await createCleanArchitectureCubitFiles(featureName);
   }
   addFilesToGit();
 }
