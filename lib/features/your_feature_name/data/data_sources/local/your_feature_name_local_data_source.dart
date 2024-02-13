@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 
 
-abstract class TestLocalDataSource {
+abstract class YourFeatureNameLocalDataSource {
   Future<Unit> getFromLocalDataBase();
 }
 
-class TestLocalDataSourceImpl implements TestLocalDataSource {
-  TestLocalDataSourceImpl();
+class YourFeatureNameLocalDataSourceImpl implements YourFeatureNameLocalDataSource {
+  YourFeatureNameLocalDataSourceImpl();
 
   @override
   Future<Unit> getFromLocalDataBase() async {

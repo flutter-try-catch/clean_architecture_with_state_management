@@ -177,7 +177,7 @@ class ${featureName.capitalize()}UseCase {
 void createPresentationFiles(String featureName) {
   File('lib/features/${featureName.toSnakeCase()}/presentation/provider/${featureName.toSnakeCase()}_provider.dart')
       .writeAsStringSync('''
-import 'package:example/features/${featureName.toSnakeCase()}/domain/use_cases/${featureName.toSnakeCase()}_use_case.dart';
+import '../../domain/use_cases/${featureName.toSnakeCase()}_use_case.dart';
 import 'package:flutter/material.dart';
 
 class ${featureName.capitalize()}Provider extends ChangeNotifier {
