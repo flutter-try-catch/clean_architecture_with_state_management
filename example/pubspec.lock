@@ -39,7 +39,7 @@ packages:
       path: ".."
       relative: true
     source: path
-version: "1.0.8"
+    version: "1.0.9"
   clock:
     dependency: transitive
     description:
@@ -65,7 +65,7 @@ version: "1.0.8"
     source: hosted
     version: "1.0.6"
   dartz:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: dartz
       sha256: e6acf34ad2e31b1eb00948692468c30ab48ac8250e0f0df661e29f12dd252168
@@ -107,7 +107,7 @@ version: "1.0.8"
     source: sdk
     version: "0.0.0"
   get_it:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: get_it
       sha256: e6017ce7fdeaf218dc51a100344d8cb70134b80e28b760f8bb23c242437bafd7

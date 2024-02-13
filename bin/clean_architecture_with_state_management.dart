@@ -15,15 +15,17 @@ void main(List<String> args) async {
 
   final featureName = args[0];
   await init(featureName);
-  if (args.length == 1) {
-    await createCleanArchitectureFiles(featureName);
-  } else if (args[1] == '-provider') {
+
+  await createCleanArchitectureFiles(featureName);
+
+  if (args[1] == '-provider') {
     await createCleanArchitectureProviderFiles(featureName);
   } else if (args[1] == '-bloc') {
     await createCleanArchitectureBlocFiles(featureName);
   }
   addFilesToGit();
 }
+
 Future init(String featureName) async {
   // Check if the file exists, if not, create it
   final file = File('lib/injection_container.dart');

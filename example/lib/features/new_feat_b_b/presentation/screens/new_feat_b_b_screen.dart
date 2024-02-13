@@ -16,7 +16,7 @@ class _NewFeatBBState extends State<NewFeatBBScreen> {
   void initState() {
     super.initState();
     _bloc = getIt<NewFeatBBBloc>();
-    _bloc.add(NewFeatBBEvent());
+    _bloc.add(const NewFeatBBEvent());
   }
 
   @override
@@ -35,13 +35,13 @@ class _NewFeatBBState extends State<NewFeatBBScreen> {
 
   Widget _buildBody(NewFeatBBState state) {
     if (state is NewFeatBBLoading) {
-      return Center(
+      return const Center(
         child: CircularProgressIndicator(),
       );
     } else if (state is NewFeatBBLoaded) {
-      return Placeholder(); // Replace with your actual widget
+      return const Placeholder(); // Replace with your actual widget
     } else if (state is NewFeatBBError) {
-      return Center(
+      return const Center(
         child: Text('Error: '),
       );
     } else {
@@ -49,4 +49,3 @@ class _NewFeatBBState extends State<NewFeatBBScreen> {
     }
   }
 }
-      

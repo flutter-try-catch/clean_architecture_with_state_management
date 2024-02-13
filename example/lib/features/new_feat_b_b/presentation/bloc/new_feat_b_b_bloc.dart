@@ -7,19 +7,15 @@ part 'new_feat_b_b_state.dart';
 class NewFeatBBBloc extends Bloc<NewFeatBBEvent, NewFeatBBState> {
   final NewFeatBBUseCase newFeatBBUseCase;
 
-  NewFeatBBBloc({required this.newFeatBBUseCase}) : super(NewFeatBBInitial());
+  NewFeatBBBloc({required this.newFeatBBUseCase})
+      : super(const NewFeatBBInitial());
 
-  @override
   Stream<NewFeatBBState> mapEventToState(NewFeatBBEvent event) async* {
-    if (event is NewFeatBBEvent) {
-      yield NewFeatBBLoading();
-      final result = await newFeatBBUseCase.call();
-      yield result.fold(
-        (exception) => NewFeatBBError(exception),
-        (_) => NewFeatBBLoaded(),
-      );
-    }
+    yield const NewFeatBBLoading();
+    final result = await newFeatBBUseCase.call();
+    yield result.fold(
+      (exception) => NewFeatBBError(exception),
+      (_) => const NewFeatBBLoaded(),
+    );
   }
 }
-
-      
