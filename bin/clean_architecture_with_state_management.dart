@@ -21,7 +21,6 @@ void main(List<String> args) async {
   }
   addFilesToGit();
 }
-
 Future init(String featureName) async {
   // Check if the file exists, if not, create it
   final file = File('lib/injection_container.dart');
@@ -32,6 +31,14 @@ import 'package:get_it/get_it.dart';
 
 final GetIt getIt = GetIt.instance;
 
+// how to use
+/**
+ * Future.wait([
+    ServiceLocator().setup(),
+    ]).then((value) {
+    runApp(const MyApp());
+    });
+ * **/
 class ServiceLocator {
   Future<void> setup() async {
     

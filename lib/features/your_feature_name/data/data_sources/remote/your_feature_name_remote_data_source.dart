@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 
 
-abstract class TestRemoteDataSource {
+abstract class YourFeatureNameRemoteDataSource {
   Future<Unit> callApi();
 }
 
-class TestRemoteDataSourceImpl implements TestRemoteDataSource {
-  TestRemoteDataSourceImpl();
+class YourFeatureNameRemoteDataSourceImpl implements YourFeatureNameRemoteDataSource {
+  YourFeatureNameRemoteDataSourceImpl();
 
   @override
   Future<Unit> callApi() async {
