@@ -1,4 +1,4 @@
-![Stand With Palestine](https://raw.githubusercontent.com/TheBSD/StandWithPalestine/main/banner-no-action.svg)]
+![Stand With Palestine](https://raw.githubusercontent.com/TheBSD/StandWithPalestine/main/banner-no-action.svg)
 # clean_architecture_with_state_management
 
 A Dart package for clean architecture with state management.
