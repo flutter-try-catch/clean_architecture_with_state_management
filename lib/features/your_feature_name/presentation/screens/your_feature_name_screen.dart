@@ -7,10 +7,8 @@ class YourFeatureNameScreen extends StatefulWidget {
 }
 
 class _YourFeatureNameState extends State<YourFeatureNameScreen> {
-
   @override
   Widget build(BuildContext context) {
     return const Scaffold(body: Placeholder());
   }
 }
-      

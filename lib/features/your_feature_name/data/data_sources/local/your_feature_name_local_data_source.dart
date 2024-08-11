@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 
-
 abstract class YourFeatureNameLocalDataSource {
   Future<Unit> getFromLocalDataBase();
 }
 
-class YourFeatureNameLocalDataSourceImpl implements YourFeatureNameLocalDataSource {
+class YourFeatureNameLocalDataSourceImpl
+    implements YourFeatureNameLocalDataSource {
   YourFeatureNameLocalDataSourceImpl();
 
   @override
@@ -13,8 +13,4 @@ class YourFeatureNameLocalDataSourceImpl implements YourFeatureNameLocalDataSour
     // send api request here
     return Future.value(unit);
   }
-
 }
-
-
-  

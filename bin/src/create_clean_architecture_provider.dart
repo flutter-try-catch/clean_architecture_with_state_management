@@ -1,6 +1,21 @@
 import 'dart:io';
 import '../clean_architecture_with_state_management.dart';
 
+/// Creates the necessary files for a clean architecture using the Provider pattern.
+///
+/// The function takes a [featureName] as a parameter, which is used to generate
+/// the file names and directory structure. It first adds the Provider package to
+/// the project by calling the `addProviderPackage` function. Then, it adds the
+/// Provider files for the specified [featureName] by calling the `addProviderFiles`
+/// function. After that, it creates the injection container file for the
+/// [featureName] by calling the `createInjectionContainerFile` function.
+///
+/// Parameters:
+/// - `featureName`: A `String` representing the name of the feature for which the
+///   files will be created.
+///
+/// Returns:
+/// - A `Future` that completes when all the necessary files have been created.
 Future createCleanArchitectureProviderFiles(String featureName) async {
   await addProviderPackage();
 
@@ -72,6 +87,7 @@ class _${featureName.capitalize()}State extends State<${featureName.capitalize()
 //   //     .createSync(recursive: true);
 // }
 
+// Creates an injection container file for the given feature.
 void createInjectionContainerFile(String featureName) {
   File('lib/features/${featureName.toSnakeCase()}/inject_${featureName.toSnakeCase()}.dart')
       .writeAsStringSync('''
@@ -101,6 +117,11 @@ inject${featureName.capitalize()}() {
       ''');
 }
 
+/// Adds the Provider package to the project using the `flutter pub add` command.
+/// 
+/// This function runs the command asynchronously and checks the exit code to determine if the package was added successfully.
+/// 
+/// Returns a Future that completes when the package addition is complete, or an error if the process fails.
 Future<void> addProviderPackage() async {
   // Use Process.run to execute flutter pub add provider command
   final result = await Process.run(

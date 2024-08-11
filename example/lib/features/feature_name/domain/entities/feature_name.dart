@@ -4,5 +4,4 @@ class FeatureName {
   const FeatureName({
     required this.data,
   });
-
 }

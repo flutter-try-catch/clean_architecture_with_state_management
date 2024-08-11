@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../repositories/feature_name_repository.dart';
 
-
 class FeatureNameUseCase {
   final FeatureNameRepository repository;
 
@@ -11,4 +10,3 @@ class FeatureNameUseCase {
     return await repository.callApi();
   }
 }
-

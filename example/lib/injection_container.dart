@@ -11,7 +11,5 @@ final GetIt getIt = GetIt.instance;
     });
  * **/
 class ServiceLocator {
-  Future<void> setup() async {
-    
-  }
+  Future<void> setup() async {}
 }

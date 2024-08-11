@@ -6,16 +6,14 @@ import 'domain/use_cases/your_feature_name_use_case.dart';
 
 //call this function in ServiceLocator.setup() function
 injectYourFeatureName() {
-
   // Repository
   getIt.registerLazySingleton<YourFeatureNameRepository>(
-          () => YourFeatureNameRepositoryImpl(remoteDataSource: getIt()));
+      () => YourFeatureNameRepositoryImpl(remoteDataSource: getIt()));
 
   // UseCases
   getIt.registerLazySingleton(() => YourFeatureNameUseCase(getIt()));
 
   // DataSources
   getIt.registerLazySingleton<YourFeatureNameRemoteDataSource>(
-          () => YourFeatureNameRemoteDataSourceImpl());
+      () => YourFeatureNameRemoteDataSourceImpl());
 }
-      

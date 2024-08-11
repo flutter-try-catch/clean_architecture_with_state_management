@@ -1,6 +1,7 @@
 import 'dart:io';
 import '../clean_architecture_with_state_management.dart';
 
+// Creates all the necessary files for a clean architecture related to the given featureName.
 Future createCleanArchitectureFiles(String featureName) async {
   createDirectories(featureName);
   createDataFiles(featureName);
@@ -10,6 +11,26 @@ Future createCleanArchitectureFiles(String featureName) async {
   createInjectionContainerFile(featureName);
 }
 
+/// Creates the necessary directories for a clean architecture feature.
+/// 
+/// This function takes a [featureName] as input and creates the following directories:
+/// - data/data_sources/local
+/// - data/data_sources/remote
+/// - data/models
+/// - data/repositories
+/// - domain/entities
+/// - domain/repositories
+/// - domain/use_cases
+/// - presentation/widgets
+/// - presentation/screens
+/// 
+/// The directories are created recursively under the 'lib/features/[featureName]' directory.
+/// 
+/// Parameters:
+///   featureName (String): The name of the feature for which the directories are created.
+/// 
+/// Returns:
+///   void
 void createDirectories(String featureName) {
   Directory('lib/features/${featureName.toSnakeCase()}/data/data_sources/local')
       .createSync(recursive: true);
@@ -32,6 +53,15 @@ void createDirectories(String featureName) {
       .createSync(recursive: true);
 }
 
+/// Creates data files for a feature.
+///
+/// The files created include local data source, remote data source, model, and repository implementation.
+///
+/// Parameters:
+///   featureName (String): The name of the feature for which the data files are created.
+///
+/// Returns:
+///   void
 void createDataFiles(String featureName) {
   File('lib/features/${featureName.toSnakeCase()}/data/data_sources/local/${featureName.toSnakeCase()}_local_data_source.dart')
       .writeAsStringSync('''
@@ -130,6 +160,7 @@ class ${featureName.capitalize()}RepositoryImpl implements ${featureName.capital
 ''');
 }
 
+// Creates domain files for a feature including entity, repository, and use case.
 void createDomainFiles(String featureName) {
   File('lib/features/${featureName.toSnakeCase()}/domain/entities/${featureName.toSnakeCase()}.dart')
       .writeAsStringSync('''
@@ -171,6 +202,14 @@ class ${featureName.capitalize()}UseCase {
 ''');
 }
 
+/// Creates a presentation file for the given featureName, generating a screen 
+/// with a basic Scaffold and a Placeholder widget.
+/// 
+/// Parameters:
+///   featureName (String): The name of the feature for which the presentation file is being created.
+/// 
+/// Returns:
+///   void
 void createPresentationFiles(String featureName) {
   File('lib/features/${featureName.toSnakeCase()}/presentation/screens/${featureName.toSnakeCase()}_screen.dart')
       .writeAsStringSync('''
@@ -192,12 +231,19 @@ class _${featureName.capitalize()}State extends State<${featureName.capitalize()
       ''');
 }
 
-
+/// Creates an initialization parameters file for the given feature.
+///
+/// Parameters:
+///   featureName (String): The name of the feature for which the initialization parameters file is being created.
+///
+/// Returns:
+///   void
 void createInitParamsFile(String featureName) {
   // File('lib/features/${featureName.toSnakeCase()}/${featureName.toSnakeCase()}_init_params.dart')
   //     .createSync(recursive: true);
 }
 
+// Creates an injection container file for the given featureName, importing necessary dependencies and registering repository, use cases, and data sources. This function also includes a comment to call the generated function in the ServiceLocator setup.
 void createInjectionContainerFile(String featureName) {
   File('lib/features/${featureName.toSnakeCase()}/inject_${featureName.toSnakeCase()}.dart')
       .writeAsStringSync('''
@@ -223,5 +269,3 @@ inject${featureName.capitalize()}() {
 }
       ''');
 }
-
-

@@ -2,7 +2,6 @@ import 'package:dartz/dartz.dart';
 import '../../domain/repositories/your_feature_name_repository.dart';
 import '../data_sources/remote/your_feature_name_remote_data_source.dart';
 
-
 class YourFeatureNameRepositoryImpl implements YourFeatureNameRepository {
   final YourFeatureNameRemoteDataSource remoteDataSource;
 
@@ -16,6 +15,4 @@ class YourFeatureNameRepositoryImpl implements YourFeatureNameRepository {
       return Left(exception);
     }
   }
-
 }
-

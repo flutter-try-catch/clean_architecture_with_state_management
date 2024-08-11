@@ -31,4 +31,3 @@ class FeatureNameScreen extends ConsumerWidget {
     }
   }
 }
-      

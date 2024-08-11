@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 
-
 abstract class YourFeatureNameRemoteDataSource {
   Future<Unit> callApi();
 }
 
-class YourFeatureNameRemoteDataSourceImpl implements YourFeatureNameRemoteDataSource {
+class YourFeatureNameRemoteDataSourceImpl
+    implements YourFeatureNameRemoteDataSource {
   YourFeatureNameRemoteDataSourceImpl();
 
   @override
@@ -13,8 +13,4 @@ class YourFeatureNameRemoteDataSourceImpl implements YourFeatureNameRemoteDataSo
     // send api request here
     return Future.value(unit);
   }
-
 }
-
-
-  
