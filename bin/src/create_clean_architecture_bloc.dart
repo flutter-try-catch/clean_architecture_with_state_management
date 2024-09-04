@@ -1,21 +1,21 @@
 import 'dart:io';
 import '../clean_architecture_with_state_management.dart';
 
-  /// Creates the necessary files for a clean architecture using the BLoC pattern.
-  ///
-  /// The function takes a [featureName] as a parameter, which is used to generate
-  /// the file names and directory structure. It first adds the BLoC package to the
-  /// project by calling the `addBlocPackage` function. Then, it adds the BLoC files
-  /// for the specified [featureName] by calling the `addBlocFiles` function. After
-  /// that, it creates the injection container file for the [featureName] by calling
-  /// the `createInjectionContainerFile` function.
-  ///
-  /// Parameters:
-  /// - `featureName`: A `String` representing the name of the feature for which the
-  ///   files will be created.
-  ///
-  /// Returns:
-  /// - A `Future` that completes when all the necessary files have been created.
+/// Creates the necessary files for a clean architecture using the BLoC pattern.
+///
+/// The function takes a [featureName] as a parameter, which is used to generate
+/// the file names and directory structure. It first adds the BLoC package to the
+/// project by calling the `addBlocPackage` function. Then, it adds the BLoC files
+/// for the specified [featureName] by calling the `addBlocFiles` function. After
+/// that, it creates the injection container file for the [featureName] by calling
+/// the `createInjectionContainerFile` function.
+///
+/// Parameters:
+/// - `featureName`: A `String` representing the name of the feature for which the
+///   files will be created.
+///
+/// Returns:
+/// - A `Future` that completes when all the necessary files have been created.
 Future createCleanArchitectureBlocFiles(String featureName) async {
   await addBlocPackage();
 
@@ -106,6 +106,7 @@ import '../../../../injection_container.dart';
 import '../bloc/${featureName.toSnakeCase()}_bloc.dart';
 
 class ${featureName.capitalize()}Screen extends StatefulWidget {
+  static const routeName = "/${featureName.toSnakeCase()}";
   const ${featureName.capitalize()}Screen({super.key});
   @override
   State<${featureName.capitalize()}Screen> createState() => _${featureName.capitalize()}State();
@@ -155,13 +156,13 @@ class _${featureName.capitalize()}State extends State<${featureName.capitalize()
 }
 
 /// Creates an injection container file for the given feature.
-/// 
-/// This function generates a Dart file that contains the necessary imports and 
+///
+/// This function generates a Dart file that contains the necessary imports and
 /// registrations for the feature's BLoC, repository, use cases, and data sources.
-/// 
+///
 /// Parameters:
 ///   featureName (String): The name of the feature for which to create the injection container.
-/// 
+///
 /// Returns:
 ///   void
 void createInjectionContainerFile(String featureName) {

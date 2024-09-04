@@ -12,7 +12,7 @@ Future createCleanArchitectureFiles(String featureName) async {
 }
 
 /// Creates the necessary directories for a clean architecture feature.
-/// 
+///
 /// This function takes a [featureName] as input and creates the following directories:
 /// - data/data_sources/local
 /// - data/data_sources/remote
@@ -23,12 +23,12 @@ Future createCleanArchitectureFiles(String featureName) async {
 /// - domain/use_cases
 /// - presentation/widgets
 /// - presentation/screens
-/// 
+///
 /// The directories are created recursively under the 'lib/features/[featureName]' directory.
-/// 
+///
 /// Parameters:
 ///   featureName (String): The name of the feature for which the directories are created.
-/// 
+///
 /// Returns:
 ///   void
 void createDirectories(String featureName) {
@@ -202,12 +202,12 @@ class ${featureName.capitalize()}UseCase {
 ''');
 }
 
-/// Creates a presentation file for the given featureName, generating a screen 
+/// Creates a presentation file for the given featureName, generating a screen
 /// with a basic Scaffold and a Placeholder widget.
-/// 
+///
 /// Parameters:
 ///   featureName (String): The name of the feature for which the presentation file is being created.
-/// 
+///
 /// Returns:
 ///   void
 void createPresentationFiles(String featureName) {

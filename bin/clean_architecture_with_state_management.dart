@@ -36,18 +36,19 @@ void main(List<String> args) async {
         await createCleanArchitectureRiverpodFiles(featureName);
         break;
       default:
-        log('Invalid state management option. Use -provider, -bloc, -cubit, or -riverpod.', name: 'Error');
+        log('Invalid state management option. Use -provider, -bloc, -cubit, or -riverpod.',
+            name: 'Error');
         return;
     }
   }
-  
+
   addFilesToGit();
 }
 
 /// Initializes the feature by creating the injection container file if it doesn't exist.
 ///
-/// This function checks if the file 'lib/injection_container.dart' exists. If it doesn't, 
-/// the function creates the file and writes the necessary import statements and class 
+/// This function checks if the file 'lib/injection_container.dart' exists. If it doesn't,
+/// the function creates the file and writes the necessary import statements and class
 /// definition for the injection container.
 ///
 /// Parameters:
@@ -103,7 +104,7 @@ void addFilesToGit() {
 }
 
 extension StringExtension on String {
-  // Capitalizes the first letter of a string and returns the modified string. 
+  // Capitalizes the first letter of a string and returns the modified string.
   String capitalize() {
     return isNotEmpty ? this[0].toUpperCase() + substring(1) : this;
   }

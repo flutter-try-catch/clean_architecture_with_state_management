@@ -59,6 +59,7 @@ import '../../../../injection_container.dart';
 import '../provider/${featureName.toSnakeCase()}_provider.dart';
 
 class ${featureName.capitalize()}Screen extends StatefulWidget {
+  static const routeName = "/${featureName.toSnakeCase()}";
   const ${featureName.capitalize()}Screen({super.key});
   @override
   State<${featureName.capitalize()}Screen> createState() => _${featureName.capitalize()}State();
@@ -118,9 +119,9 @@ inject${featureName.capitalize()}() {
 }
 
 /// Adds the Provider package to the project using the `flutter pub add` command.
-/// 
+///
 /// This function runs the command asynchronously and checks the exit code to determine if the package was added successfully.
-/// 
+///
 /// Returns a Future that completes when the package addition is complete, or an error if the process fails.
 Future<void> addProviderPackage() async {
   // Use Process.run to execute flutter pub add provider command
