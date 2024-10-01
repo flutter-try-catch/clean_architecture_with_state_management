@@ -1,4 +1,3 @@
-import 'package:example/features/feature_name/presentation/screens/feature_name_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -40,7 +39,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const FeatureNameScreen(),
+      home:  Container(),
     );
   }
 }
