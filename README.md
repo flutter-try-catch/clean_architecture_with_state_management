@@ -1,4 +1,5 @@
 ![Stand With Palestine](https://raw.githubusercontent.com/TheBSD/StandWithPalestine/main/banner-no-action.svg)
+
 # clean_architecture_with_state_management
 
 A Dart package for clean architecture with state management.
@@ -178,6 +179,7 @@ dart run clean_architecture_with_state_management yourFeatureName -cubit
 |  |         └  feature_screen.dart
 |  └ inject_feature_name.dart
 ```
+
 ### Create architecture with `riverpod` state management:
 
 # riverpod
@@ -210,7 +212,8 @@ dart run clean_architecture_with_state_management yourFeatureName -riverpod
 |  |         └  feature_use_case.dart
 |  |- presentation/
 |  |    |- riverpod/
-|  |    |    └  feature_provider.dart
+|  |    |    └  feature_.dart
+|  |         └  feature_provider.dart
 |  |    |- widgets/
 |  |    └  screens/
 |  |         └  feature_screen.dart
