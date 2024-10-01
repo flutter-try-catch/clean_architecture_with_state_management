@@ -17,7 +17,7 @@ class MaieScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(maieProvider);
     return Scaffold(
-      body: Text('Maie:'),
+      body: Center(child: Text('Maie:')),
     );
   }
 }

@@ -10,24 +10,35 @@ class FeatureNameScreen extends ConsumerWidget {
     final state = ref.watch(featureNameProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text('FeatureName')),
-      body: _buildBody(state),
+      appBar: AppBar(title: const Text('FeatureName')),
+      body: Consumer(builder: (_, ref, __) {
+        if (state is FeatureNameLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is FeatureNameLoaded) {
+          return Center(child: Text('Data loaded successfully ${state.count}'));
+        } else if (state is FeatureNameError) {
+          return Center(child: Text('Error: ${state.exception}'));
+        } else {
+          return const Center(child: Text('Press the button to load data'));
+        }
+      }),
       floatingActionButton: FloatingActionButton(
         onPressed: () => ref.read(featureNameProvider.notifier).fetchData(),
-        child: Icon(Icons.refresh),
+        child: const Icon(Icons.refresh),
       ),
     );
   }
 
-  Widget _buildBody(FeatureNameState state) {
-    if (state is FeatureNameLoading) {
-      return Center(child: CircularProgressIndicator());
-    } else if (state is FeatureNameLoaded) {
-      return Center(child: Text('Data loaded successfully'));
-    } else if (state is FeatureNameError) {
-      return Center(child: Text('Error: ${state.exception}'));
-    } else {
-      return Center(child: Text('Press the button to load data'));
-    }
-  }
+//   Widget _buildBody(FeatureNameState state) {
+//     if (state is FeatureNameLoading) {
+//       return const Center(child: CircularProgressIndicator());
+//     } else if (state is FeatureNameLoaded) {
+//       return const Center(child: Text('Data loaded successfully'));
+//     } else if (state is FeatureNameError) {
+//       return Center(child: Text('Error: ${state.exception}'));
+//     } else {
+//       return const Center(child: Text('Press the button to load data'));
+//     }
+//   }
+// }
 }
