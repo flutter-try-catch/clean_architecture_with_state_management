@@ -69,7 +69,7 @@ class ${featureName.capitalize()}Screen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(newFeatureProvider.notifier);
+    final state = ref.watch(${featureName}Provider.notifier);
     return Scaffold(
       body: Placeholder(),
     );
