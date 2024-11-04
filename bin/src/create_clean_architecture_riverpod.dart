@@ -57,25 +57,46 @@ class ${featureName.capitalize()}Provider extends StateNotifier<${featureName.ca
       ''');
 
   File('lib/features/${featureName.toSnakeCase()}/presentation/screens/${featureName.toSnakeCase()}_screen.dart')
-      .writeAsStringSync('''
+    .writeAsStringSync(generateScreenCode(featureName));
+}
+
+String generateScreenCode(String featureName) {
+  return '''
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../provider/${featureName.toSnakeCase()}_provider.dart';
-
-
+import '../provider/${featureName.toSnakeCase()}_state.dart';
 
 class ${featureName.capitalize()}Screen extends ConsumerWidget {
+  static const String routeName = '/${featureName.toLowerCase()}';
   const ${featureName.capitalize()}Screen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(${featureName}Provider.notifier);
+    final state = ref.watch(${featureName.toLowerCase()}Provider);
+
     return Scaffold(
-      body: Placeholder(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => ref.read(${featureName.toLowerCase()}Provider.notifier).changeState(),
+      ),
+      body: Center(
+        child: Builder(
+          builder: (context) {
+            if (state is ${featureName.capitalize()}Initial) {
+              return const Text('Initial State');
+            } else if (state is ${featureName.capitalize()}Loading) {
+              return const Text('Loading State');
+            } else if (state is ${featureName.capitalize()}Loaded) {
+              return const Text('Loaded State');
+            }
+            return const Text('Unknown State');
+          },
+        ),
+      ),
     );
   }
 }
-      ''');
+''';
 }
 
 // Creates an injection container file for the given feature.
@@ -119,7 +140,7 @@ final ${featureName}DataSourceProvider = Provider<${featureName.capitalize()}Rem
 Future<void> addRiverpodPackage() async {
   final result = await Process.run(
     'flutter',
-    ['pub', 'add', 'riverpod'],
+    ['pub', 'add', 'flutter_riverpod'],
     runInShell: true,
   );
 
