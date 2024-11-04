@@ -76,9 +76,6 @@ class ${featureName.capitalize()}Screen extends ConsumerWidget {
     final state = ref.watch(${featureName.toLowerCase()}Provider);
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => ref.read(${featureName.toLowerCase()}Provider.notifier).changeState(),
-      ),
       body: Center(
         child: Builder(
           builder: (context) {
