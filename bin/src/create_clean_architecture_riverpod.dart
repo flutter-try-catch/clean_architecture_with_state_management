@@ -69,7 +69,7 @@ import '../provider/${featureName.toSnakeCase()}_state.dart';
 
 class ${featureName.capitalize()}Screen extends ConsumerWidget {
   static const String routeName = '/${featureName.toLowerCase()}';
-  const ${featureName.capitalize()}Screen({Key? key}) : super(key: key);
+  const ${featureName.capitalize()}Screen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -100,15 +100,13 @@ class ${featureName.capitalize()}Screen extends ConsumerWidget {
 void createInjectionContainerFile(String featureName) {
   File('lib/features/${featureName.toSnakeCase()}/inject_${featureName.toSnakeCase()}.dart')
       .writeAsStringSync('''
-import '../../injection_container.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'data/data_sources/remote/${featureName.toSnakeCase()}_remote_data_source.dart';
 import 'data/repositories/${featureName.toSnakeCase()}_repository_impl.dart';
 import 'domain/repositories/${featureName.toSnakeCase()}_repository.dart';
 import 'domain/use_cases/${featureName.toSnakeCase()}_use_case.dart';
 import 'presentation/provider/${featureName.toSnakeCase()}_provider.dart';
 import 'presentation/provider/${featureName.toSnakeCase()}_state.dart';
-import 'package:riverpod/riverpod.dart';
 
 
 // Providers

@@ -44,50 +44,129 @@ void addCubitFiles(String featureName) {
 import '../../domain/use_cases/${featureName.toSnakeCase()}_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part '${featureName.toSnakeCase()}_state.dart';
+import '${featureName.toSnakeCase()}_state.dart';
 
 class ${featureName.capitalize()}Cubit extends Cubit<${featureName.capitalize()}State> {
   final ${featureName.capitalize()}UseCase ${featureName}UseCase;
 
-  ${featureName.capitalize()}Cubit({required this.${featureName}UseCase}) : super(${featureName.capitalize()}Initial());
+  ${featureName.capitalize()}Cubit({required this.${featureName}UseCase})
+      : super(const ${featureName.capitalize()}State(status: ${featureName.capitalize()}Status.initial));
 
   Future<void> fetchData() async {
-    emit(const ${featureName.capitalize()}Loading());
+    emit(state.copyWith(status: ${featureName.capitalize()}Status.loading));
+
     final result = await ${featureName}UseCase.call();
+
     result.fold(
-      (exception) => emit(${featureName.capitalize()}Error(exception)),
-      (_) => emit(const ${featureName.capitalize()}Loaded()),
+      (exception) => emit(
+        state.copyWith(
+          status: ${featureName.capitalize()}Status.error,
+          errorMessage: exception.toString(),
+        ),
+      ),
+      (_) => emit(
+        state.copyWith(
+          status: ${featureName.capitalize()}Status.loaded,
+          errorMessage: null,
+        ),
+      ),
     );
   }
 }
-
-      ''');
+''');
 
   File('lib/features/${featureName.toSnakeCase()}/presentation/cubit/${featureName.toSnakeCase()}_state.dart')
       .writeAsStringSync('''
-part of '${featureName.toSnakeCase()}_cubit.dart';
 
-abstract class ${featureName.capitalize()}State {
-  const ${featureName.capitalize()}State();
+enum ${featureName.capitalize()}Status {
+  initial,
+  loading,
+  loaded,
+  error,
 }
 
-class ${featureName.capitalize()}Initial extends ${featureName.capitalize()}State {
-  const ${featureName.capitalize()}Initial();
+class ${featureName.capitalize()}State {
+  final ${featureName.capitalize()}Status status;
+  final String? errorMessage;
+
+  const ${featureName.capitalize()}State({
+    required this.status,
+    this.errorMessage,
+  });
+
+  ${featureName.capitalize()}State copyWith({
+    ${featureName.capitalize()}Status? status,
+    String? errorMessage,
+  }) {
+    return ${featureName.capitalize()}State(
+      status: status ?? this.status,
+      errorMessage: errorMessage ?? this.errorMessage,
+    );
+  }
+}
+''');
+
+  File('lib/features/${featureName.toSnakeCase()}/presentation/screens/${featureName.toSnakeCase()}_screen.dart')
+      .writeAsStringSync('''
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../injection_container.dart';
+import '../cubit/${featureName.toSnakeCase()}_cubit.dart';
+import '../cubit/${featureName.toSnakeCase()}_state.dart';
+
+class ${featureName.capitalize()}Screen extends StatefulWidget {
+  static const routeName = "/${featureName.toSnakeCase()}";
+  const ${featureName.capitalize()}Screen({super.key});
+
+  @override
+  State<${featureName.capitalize()}Screen> createState() => _${featureName.capitalize()}ScreenState();
 }
 
-class ${featureName.capitalize()}Loading extends ${featureName.capitalize()}State {
-  const ${featureName.capitalize()}Loading();
-}
+class _${featureName.capitalize()}ScreenState extends State<${featureName.capitalize()}Screen> {
+  @override
+  void initState() {
+    super.initState();
+    // You can call Cubit methods here if needed, e.g.:
+    // context.read<${featureName.capitalize()}Cubit>().fetchData();
+  }
 
-class ${featureName.capitalize()}Loaded extends ${featureName.capitalize()}State {
-  const ${featureName.capitalize()}Loaded();
-}
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getIt<${featureName.capitalize()}Cubit>(),
+      child: BlocBuilder<${featureName.capitalize()}Cubit, ${featureName.capitalize()}State>(
+        builder: (context, state) {
+          if (state.status == ${featureName.capitalize()}Status.loading) {
+            return const Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            );
+          }
 
-class ${featureName.capitalize()}Error extends ${featureName.capitalize()}State {
-  final Exception exception;
-  const ${featureName.capitalize()}Error(this.exception);
-}
+          if (state.status == ${featureName.capitalize()}Status.error) {
+            return Scaffold(
+              body: Center(
+                child: Text(state.errorMessage ?? 'an_error_occurred'),
+              ),
+            );
+          }
 
+          if (state.status == ${featureName.capitalize()}Status.loaded) {
+            // TODO: Replace this with your actual loaded UI
+            return const Scaffold(
+              body: Center(child: Text('Data Loaded')),
+            );
+          }
+
+          return Scaffold(
+            body: Center(
+              child: Text('${featureName.toSnakeCase()} screen'),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
 ''');
 }
 

@@ -1,6 +1,6 @@
 name: clean_architecture_with_state_management
 description: A package to generate clean architecture files with various state management options.
-version: 1.1.9
+version: 1.2.0
 homepage: https://github.com/flutter-try-catch/clean_architecture_with_state_management
 
 environment:
@@ -14,7 +14,9 @@ dependencies:
   get_it: ^7.6.4
   flutter_riverpod: ^2.6.1
   riverpod: ^2.5.1
-  provider: ^6.1.2
+  provider: ^6.1.5
+  bloc: ^9.0.0
+  flutter_bloc: ^9.1.1
 
 dev_dependencies:
   flutter_test:
