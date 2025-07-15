@@ -1,6 +1,6 @@
 name: clean_architecture_with_state_management
 description: A package to generate clean architecture files with various state management options.
-version: 1.2.0
+version: 1.2.1
 homepage: https://github.com/flutter-try-catch/clean_architecture_with_state_management
 
 environment:
