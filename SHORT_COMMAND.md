@@ -46,23 +46,6 @@ cleanarch product --dry-run
 cleanarch --help
 ```
 
----
-
-## 💡 Make It Even Shorter
-
-With global installation, add a shell alias:
-
-```bash
-# Add to ~/.zshrc or ~/.bashrc
-alias ca='cleanarch'
-```
-
-Then use:
-```bash
-ca user -b
-ca --help
-ca
-```
 
 ---
 
@@ -77,21 +60,6 @@ $ cleanarch 123invalid
 ℹ   • Start with a letter (a-z, A-Z)
 ℹ   • Contain only letters, numbers, and underscores
 ℹ   • Example: user, user_profile, myFeature
-```
-
----
-
-## 🔄 Updating After Changes
-
-If you update the package code:
-
-```bash
-# Delete cached snapshot
-rm -f .dart_tool/pub/bin/clean_architecture_with_state_management/*.snapshot
-
-# Or fully refresh
-dart pub global deactivate clean_architecture_with_state_management
-dart pub global activate --source path .
 ```
 
 ---

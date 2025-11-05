@@ -201,10 +201,10 @@ class CLIHelper {
     print('  ╔═══════════════════════════════════════════════════════╗');
     print('  ║                                                       ║');
     print('  ║   🏗️  Clean Architecture Generator                    ║');
-    print('  ║   with State Management                              ║');
+    print('  ║   with State Management                               ║');
     print('  ║                                                       ║');
-    print('  ║   Generate clean, scalable Flutter features          ║');
-    print('  ║   with your favorite state management                ║');
+    print('  ║   Generate clean, scalable Flutter features           ║');
+    print('  ║   with your favorite state management                 ║');
     print('  ║                                                       ║');
     print('  ╚═══════════════════════════════════════════════════════╝');
     print(_reset);

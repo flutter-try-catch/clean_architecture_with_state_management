@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import '../clean_architecture_with_state_management.dart';
+import 'string_extensions.dart';
 
 /// Creates the necessary files for a clean architecture using the Riverpod pattern.
 Future<void> createCleanArchitectureRiverpodFiles(String featureName) async {
@@ -56,6 +56,8 @@ class ${featureName.capitalize()}Provider extends StateNotifier<${featureName.ca
 }
       ''');
 
+  Directory('lib/features/${featureName.toSnakeCase()}/presentation/screens')
+      .createSync(recursive: true);
   File('lib/features/${featureName.toSnakeCase()}/presentation/screens/${featureName.toSnakeCase()}_screen.dart')
     .writeAsStringSync(generateScreenCode(featureName));
 }

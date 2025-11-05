@@ -25,6 +25,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  test: ^1.25.15
 
 # Executable command - Short alias for the CLI
 executables:
