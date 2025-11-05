@@ -17,10 +17,18 @@ dependencies:
   provider: ^6.1.5
   bloc: ^9.0.0
   flutter_bloc: ^9.1.1
+  # Interactive CLI packages
+  interact: ^2.2.0
+  args: ^2.4.2
+  cli_util: ^0.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+# Executable command - Short alias for the CLI
+executables:
+  cleanarch: clean_architecture_with_state_management
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
