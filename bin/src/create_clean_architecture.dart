@@ -1,13 +1,22 @@
-import 'dart:io';
 import '../clean_architecture_with_state_management.dart';
+import 'cli_helper.dart';
+import 'file_creator.dart';
 
 // Creates all the necessary files for a clean architecture related to the given featureName.
 Future createCleanArchitectureFiles(String featureName) async {
+  CLIHelper.step('Creating directory structure...');
   createDirectories(featureName);
+  
+  CLIHelper.step('Creating data layer...');
   createDataFiles(featureName);
+  
+  CLIHelper.step('Creating domain layer...');
   createDomainFiles(featureName);
+  
+  CLIHelper.step('Creating presentation layer...');
   createPresentationFiles(featureName);
-  // createInitParamsFile(featureName);
+  
+  CLIHelper.step('Setting up dependency injection...');
   createInjectionContainerFile(featureName);
 }
 
@@ -32,25 +41,21 @@ Future createCleanArchitectureFiles(String featureName) async {
 /// Returns:
 ///   void
 void createDirectories(String featureName) {
-  Directory('lib/features/${featureName.toSnakeCase()}/data/data_sources/local')
-      .createSync(recursive: true);
-  Directory(
-          'lib/features/${featureName.toSnakeCase()}/data/data_sources/remote')
-      .createSync(recursive: true);
-  Directory('lib/features/${featureName.toSnakeCase()}/data/models')
-      .createSync(recursive: true);
-  Directory('lib/features/${featureName.toSnakeCase()}/data/repositories')
-      .createSync(recursive: true);
-  Directory('lib/features/${featureName.toSnakeCase()}/domain/entities')
-      .createSync(recursive: true);
-  Directory('lib/features/${featureName.toSnakeCase()}/domain/repositories')
-      .createSync(recursive: true);
-  Directory('lib/features/${featureName.toSnakeCase()}/domain/use_cases')
-      .createSync(recursive: true);
-  Directory('lib/features/${featureName.toSnakeCase()}/presentation/widgets')
-      .createSync(recursive: true);
-  Directory('lib/features/${featureName.toSnakeCase()}/presentation/screens')
-      .createSync(recursive: true);
+  final directories = [
+    'lib/features/${featureName.toSnakeCase()}/data/data_sources/local',
+    'lib/features/${featureName.toSnakeCase()}/data/data_sources/remote',
+    'lib/features/${featureName.toSnakeCase()}/data/models',
+    'lib/features/${featureName.toSnakeCase()}/data/repositories',
+    'lib/features/${featureName.toSnakeCase()}/domain/entities',
+    'lib/features/${featureName.toSnakeCase()}/domain/repositories',
+    'lib/features/${featureName.toSnakeCase()}/domain/use_cases',
+    'lib/features/${featureName.toSnakeCase()}/presentation/widgets',
+    'lib/features/${featureName.toSnakeCase()}/presentation/screens',
+  ];
+
+  for (final dir in directories) {
+    FileCreator.createDirectory(dir);
+  }
 }
 
 /// Creates data files for a feature.
@@ -63,8 +68,10 @@ void createDirectories(String featureName) {
 /// Returns:
 ///   void
 void createDataFiles(String featureName) {
-  File('lib/features/${featureName.toSnakeCase()}/data/data_sources/local/${featureName.toSnakeCase()}_local_data_source.dart')
-      .writeAsStringSync('''
+  // Local Data Source
+  FileCreator.createFile(
+    'lib/features/${featureName.toSnakeCase()}/data/data_sources/local/${featureName.toSnakeCase()}_local_data_source.dart',
+    '''
 import 'package:dartz/dartz.dart';
 
 
@@ -82,11 +89,12 @@ class ${featureName.capitalize()}LocalDataSourceImpl implements ${featureName.ca
   }
 
 }
-
-
   ''');
-  File('lib/features/${featureName.toSnakeCase()}/data/data_sources/remote/${featureName.toSnakeCase()}_remote_data_source.dart')
-      .writeAsStringSync('''
+
+  // Remote Data Source
+  FileCreator.createFile(
+    'lib/features/${featureName.toSnakeCase()}/data/data_sources/remote/${featureName.toSnakeCase()}_remote_data_source.dart',
+    '''
 import 'package:dartz/dartz.dart';
 
 
@@ -107,8 +115,11 @@ class ${featureName.capitalize()}RemoteDataSourceImpl implements ${featureName.c
 
 
   ''');
-  File('lib/features/${featureName.toSnakeCase()}/data/models/${featureName.toSnakeCase()}_model.dart')
-      .writeAsStringSync('''
+
+  // Model
+  FileCreator.createFile(
+    'lib/features/${featureName.toSnakeCase()}/data/models/${featureName.toSnakeCase()}_model.dart',
+    '''
 import '../../domain/entities/${featureName.toSnakeCase()}.dart';
 
 class ${featureName.capitalize()}Model extends ${featureName.capitalize()} {
@@ -134,8 +145,11 @@ class ${featureName.capitalize()}Model extends ${featureName.capitalize()} {
 }
 
 ''');
-  File('lib/features/${featureName.toSnakeCase()}/data/repositories/${featureName.toSnakeCase()}_repository_impl.dart')
-      .writeAsStringSync('''
+
+  // Repository Implementation
+  FileCreator.createFile(
+    'lib/features/${featureName.toSnakeCase()}/data/repositories/${featureName.toSnakeCase()}_repository_impl.dart',
+    '''
 import 'package:dartz/dartz.dart';
 import '../../domain/repositories/${featureName.toSnakeCase()}_repository.dart';
 import '../data_sources/remote/${featureName.toSnakeCase()}_remote_data_source.dart';
@@ -162,8 +176,10 @@ class ${featureName.capitalize()}RepositoryImpl implements ${featureName.capital
 
 // Creates domain files for a feature including entity, repository, and use case.
 void createDomainFiles(String featureName) {
-  File('lib/features/${featureName.toSnakeCase()}/domain/entities/${featureName.toSnakeCase()}.dart')
-      .writeAsStringSync('''
+  // Entity
+  FileCreator.createFile(
+    'lib/features/${featureName.toSnakeCase()}/domain/entities/${featureName.toSnakeCase()}.dart',
+    '''
 class ${featureName.capitalize()} {
   final String? data;
 
@@ -173,8 +189,11 @@ class ${featureName.capitalize()} {
 
 }
 ''');
-  File('lib/features/${featureName.toSnakeCase()}/domain/repositories/${featureName.toSnakeCase()}_repository.dart')
-      .writeAsStringSync('''
+
+  // Repository
+  FileCreator.createFile(
+    'lib/features/${featureName.toSnakeCase()}/domain/repositories/${featureName.toSnakeCase()}_repository.dart',
+    '''
 import 'package:dartz/dartz.dart';
 
 
@@ -183,8 +202,11 @@ abstract class ${featureName.capitalize()}Repository {
 }
 
 ''');
-  File('lib/features/${featureName.toSnakeCase()}/domain/use_cases/${featureName.toSnakeCase()}_use_case.dart')
-      .writeAsStringSync('''
+
+  // Use Case
+  FileCreator.createFile(
+    'lib/features/${featureName.toSnakeCase()}/domain/use_cases/${featureName.toSnakeCase()}_use_case.dart',
+    '''
 import 'package:dartz/dartz.dart';
 import '../repositories/${featureName.toSnakeCase()}_repository.dart';
 
@@ -211,8 +233,10 @@ class ${featureName.capitalize()}UseCase {
 /// Returns:
 ///   void
 void createPresentationFiles(String featureName) {
-  File('lib/features/${featureName.toSnakeCase()}/presentation/screens/${featureName.toSnakeCase()}_screen.dart')
-      .writeAsStringSync('''
+  // Screen
+  FileCreator.createFile(
+    'lib/features/${featureName.toSnakeCase()}/presentation/screens/${featureName.toSnakeCase()}_screen.dart',
+    '''
 import 'package:flutter/material.dart';
 
 class ${featureName.capitalize()}Screen extends StatefulWidget {
@@ -245,8 +269,9 @@ void createInitParamsFile(String featureName) {
 
 // Creates an injection container file for the given featureName, importing necessary dependencies and registering repository, use cases, and data sources. This function also includes a comment to call the generated function in the ServiceLocator setup.
 void createInjectionContainerFile(String featureName) {
-  File('lib/features/${featureName.toSnakeCase()}/inject_${featureName.toSnakeCase()}.dart')
-      .writeAsStringSync('''
+  FileCreator.createFile(
+    'lib/features/${featureName.toSnakeCase()}/inject_${featureName.toSnakeCase()}.dart',
+    '''
 import '../../injection_container.dart';
 import 'data/data_sources/remote/${featureName.toSnakeCase()}_remote_data_source.dart';
 import 'data/repositories/${featureName.toSnakeCase()}_repository_impl.dart';
