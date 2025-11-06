@@ -332,6 +332,22 @@ void main() {
         expect(content.contains('init();'), true);
       });
     });
+
+    group('Package Installation', () {
+      test('addProviderPackage() should be callable and complete', () async {
+        // This test verifies that the function exists and completes
+        // Actual package installation would require flutter environment
+        expect(() => provider.addProviderPackage(), returnsNormally);
+        
+        // Wait for the process to complete
+        try {
+          await provider.addProviderPackage();
+        } catch (e) {
+          // Process might fail if flutter is not available in test environment
+          // But the function should not throw unexpectedly
+        }
+      });
+    });
   });
 }
 

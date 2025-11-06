@@ -397,6 +397,19 @@ void main() {
         expect(File('lib/features/my_feature_name/domain/entities/my_feature_name.dart').existsSync(), true);
       });
     });
+
+    group('createInitParamsFile()', () {
+      test('should not throw when called', () {
+        // This function is currently a no-op but should not throw
+        expect(() => createInitParamsFile('user'), returnsNormally);
+      });
+
+      test('should handle different feature names', () {
+        expect(() => createInitParamsFile('auth'), returnsNormally);
+        expect(() => createInitParamsFile('product'), returnsNormally);
+        expect(() => createInitParamsFile('UserProfile'), returnsNormally);
+      });
+    });
   });
 }
 
