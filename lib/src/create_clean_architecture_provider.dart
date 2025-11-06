@@ -1,5 +1,5 @@
 import 'dart:io';
-import '../clean_architecture_with_state_management.dart';
+import 'string_extensions.dart';
 
 /// Creates the necessary files for a clean architecture using the Provider pattern.
 ///
@@ -51,6 +51,8 @@ class ${featureName.capitalize()}Provider extends ChangeNotifier {
       ''');
   // File('lib/features/${featureName.toSnakeCase()}/presentation/widgets/${featureName.toSnakeCase()}_widget.dart')
   //     .createSync(recursive: true);
+  Directory('lib/features/${featureName.toSnakeCase()}/presentation/screens')
+      .createSync(recursive: true);
   File('lib/features/${featureName.toSnakeCase()}/presentation/screens/${featureName.toSnakeCase()}_screen.dart')
       .writeAsStringSync('''
 import 'package:flutter/material.dart';

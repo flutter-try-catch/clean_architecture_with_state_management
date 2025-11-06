@@ -36,6 +36,11 @@ class FileCreator {
       if (file.existsSync()) {
         CLIHelper.fileSkipped('$path (already exists)');
       } else {
+        // Create parent directories if they don't exist
+        final directory = file.parent;
+        if (!directory.existsSync()) {
+          directory.createSync(recursive: true);
+        }
         file.writeAsStringSync(content);
         CLIHelper.fileCreated(path);
         _filesCreated++;

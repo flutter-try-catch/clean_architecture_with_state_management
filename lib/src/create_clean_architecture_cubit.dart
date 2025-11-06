@@ -1,5 +1,5 @@
 import 'dart:io';
-import '../clean_architecture_with_state_management.dart';
+import 'string_extensions.dart';
 import 'create_clean_architecture_bloc.dart';
 
 /// Creates the necessary files for a clean architecture using the Cubit pattern.
@@ -106,6 +106,8 @@ class ${featureName.capitalize()}State {
 }
 ''');
 
+  Directory('lib/features/${featureName.toSnakeCase()}/presentation/screens')
+      .createSync(recursive: true);
   File('lib/features/${featureName.toSnakeCase()}/presentation/screens/${featureName.toSnakeCase()}_screen.dart')
       .writeAsStringSync('''
 import 'package:flutter/material.dart';

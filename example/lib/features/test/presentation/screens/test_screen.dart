@@ -5,7 +5,7 @@ import '../provider/test_state.dart';
 
 class TestScreen extends ConsumerWidget {
   static const String routeName = '/test';
-  const TestScreen({Key? key}) : super(key: key);
+  const TestScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

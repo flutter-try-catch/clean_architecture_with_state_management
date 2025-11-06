@@ -1,6 +1,6 @@
-import '../clean_architecture_with_state_management.dart';
 import 'cli_helper.dart';
 import 'file_creator.dart';
+import 'string_extensions.dart';
 
 // Creates all the necessary files for a clean architecture related to the given featureName.
 Future createCleanArchitectureFiles(String featureName) async {
